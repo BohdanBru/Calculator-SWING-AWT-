@@ -6,6 +6,7 @@ import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import com.jtattoo.plaf.smart.SmartLookAndFeel;
 
 import javax.swing.*;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -20,6 +21,7 @@ public class Launcher {
     private MyJButton minus;
     private MyJButton divide;
     private MyJButton multiply;
+    private MyJButton changeSkin;
 
     private JLabel labelNumber1;
     private JLabel labelNumber2;
@@ -37,7 +39,7 @@ public class Launcher {
 
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel(new SmartLookAndFeel());
+            UIManager.setLookAndFeel(new NimbusLookAndFeel());
         } catch (UnsupportedLookAndFeelException e) {
             throw new RuntimeException(e);
         }
@@ -60,6 +62,7 @@ public class Launcher {
         frame.getContentPane().add(panel1, BorderLayout.NORTH);
         frame.getContentPane().add(panel2, BorderLayout.CENTER);
         frame.getContentPane().add(panel3, BorderLayout.SOUTH);
+        changeSkinListener();
 
         frame.setVisible(true);
     }
@@ -84,6 +87,7 @@ public class Launcher {
         panel2.add(divide);
         panel3.add(labelResult);
         panel3.add(fieldResult);
+        panel3.add(changeSkin);
     }
 
     private void createLabels() {
@@ -98,6 +102,7 @@ public class Launcher {
         minus = new MyJButton("Minus");
         divide = new MyJButton("Divide");
         multiply = new MyJButton("Multiply");
+        changeSkin = new MyJButton("Change skin");
         addButtonListeners();
     }
 
@@ -123,6 +128,9 @@ public class Launcher {
     private void addTextFieldListeners() {
         fieldNumber1.addFocusListener(new CalcTextFieldFocusListener(fieldNumber1));
         fieldNumber2.addFocusListener(new CalcTextFieldFocusListener(fieldNumber2));
+    }
+    private void changeSkinListener(){
+        changeSkin.addActionListener(new ChangeSkinListner(frame, new SmartLookAndFeel()));
     }
 
 }
